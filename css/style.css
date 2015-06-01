@@ -1,0 +1,68 @@
+html, body {
+  height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background-color:#E8EAEF;
+  padding-left:0.3em;
+  padding-right:0.3em;
+  padding-top:0.3em;
+} 
+
+button {
+  margin:-0.1em;
+  border:none;
+  background-color:#E8EAEF;
+}
+
+/* Spacing */
+.section {
+  color: #505050;
+  padding-right:0.3em;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.buffer {
+  padding-top:1.8em;
+}
+
+
+.btn {
+  margin-right: 0.1em;
+  width: 98%;
+}
+.entry {
+  padding-top:0.4em;
+}
+
+.left {
+  display:inline;
+  float:left;
+}
+
+.right {
+  display:inline;
+  float:right;
+}
+
+/* Colors */
+.affirm {
+  background-color:#79BD8F;
+  color:#F2F2F2;
+}
+
+.cancel {
+  background-color:#1F8DD6;
+  color:#F2F2F2;
+}
+
+/* Override */
+input {
+  background-color:#EEEEEE;
+}
+
+/* hacks */
+button::-moz-focus-inner {
+  border: 0;
+}

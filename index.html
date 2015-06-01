@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width-device-width, initial-scale=1.0 user-scalable=no'>
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>health.js</title>
+  </head>
+
+  <body>
+
+    <div data-scope='food'> 
+      <div class='left'><i class='fa fa-heartbeat fa-fw section'></i>Food</div>
+
+      <!-- Date -->
+      <div class='right label'>
+        <button data-fn='prev'><i class='fa fa-arrow-circle-left fa-fw'></i></button>
+        <button data-fn='now'><i class='fa fa-calendar-o fa-fw'></i></button>
+        <span data-scope='date'>
+          <script>
+            document.querySelector("div[data-scope='food']").querySelector("span[data-scope='date']").innerHTML 
+            = new Date().toLocaleDateString();
+          </script>
+        </span>
+        <button data-fn='next'><i class='fa fa-arrow-circle-right fa-fw'></i></button>
+      </div>
+      
+      <!-- Legend -->
+      <div class='buffer'></div>
+      <div class='section'>
+        <div class='label pure-g'>
+          <div class='pure-u-5-24'>Item</div>
+          <div class='pure-u-11-24'>Nutrition</div>
+          <div class='pure-u-6-24'>Action</div>
+        </div>
+
+        <!-- Entry Template -->
+        <template class='entry pure-g' data-template='entry'>
+          <div class='pure-u-5-24'>{{name}}</div>
+          <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
+          <div class='pure-u-6-24'>
+            <button data-fn='modify'><i class='fa fa-pencil fa-fw'></i></button>
+            <button data-fn='remove'><i class="fa fa-times-circle fa-fw"></i></button>
+          </div>
+        </template>
+
+        <!-- Total Template -->
+        <template class='label' data-template='total'>
+          <div data-scope='total'>
+            <br>Total: {{calories}} calories / {{protein}} protein
+          </div>
+        </template>
+
+      <!-- Injection Zone -->
+      <div data-scope='inject'></div>
+
+    </div><hr>
+    </div>
+
+    <div data-scope='modify'>
+      <i class='fa fa-plus-circle fa-fw section'></i>Add / Modify
+
+      <!-- Text Fields -->
+      <form class='pure-form'>
+        <fieldset class="pure-group fields" data-scope='stats'>
+          <input type="text"   class="pure-input-1" placeholder='Name'>
+          <input type="number" class="pure-input-1" placeholder='Calories' pattern="[\d]*">
+          <input type="number" class="pure-input-1" placeholder='Protein' pattern="[\d]*">
+        </fieldset>
+
+        <div class='pure-g'>
+          <div class='pure-u-11-24'><button type='button' class="pure-button pure-input-1 affirm" data-fn='modify'>Add / Modify</button></div>
+          <div class='pure-u-1-24'></div> <!-- Buffer -->
+          <div class='pure-u-12-24'><button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button></div>
+        </div>
+
+      </form>
+      <!-- Invisi Div for Modifications -->
+        <div data-scope='stamp' data-stamp=''></div>
+      </div>
+
+    </div>
+
+    <script src='js/lib/tinytim.min.js'></script>
+    <script src='js/modify.js'></script>
+    <script src='js/food.js'></script>
+    <script src='js/database.js'></script>
+    <script src='js/time.js'></script>
+    <script src='js/callback.js'></script>
+    <script src='js/init.js'></script>
+
+  </body>
+</html>
