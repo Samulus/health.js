@@ -4,18 +4,20 @@ console.log("js/database.js [✓]");
   /* Private */
   var db = {};
 
+  top.DEBUG = db;
+
   /* Public */
   top.Database = {
 
     Read: function(day_stamp) {
       var item = localStorage.getItem(day_stamp);
-      if (item === null) return item;
+      if (item === null) return null;
       db[day_stamp] = JSON.parse(item);
       return db[day_stamp];
     },
 
-    Write: function(day_stamp, day) {
-      localStorage.setItem(day_stamp, JSON.stringify(db[day]));
+    Write: function(day_stamp) {
+      localStorage.setItem(day_stamp, JSON.stringify(db[day_stamp]));
     },
 
     Add: function(entry, day, stamp) {
@@ -23,7 +25,7 @@ console.log("js/database.js [✓]");
         db[day] = {};
       db[day][stamp] = entry;
 
-      Database.Write(day, db[day]);
+      Database.Write(day);
       return db[day];
     },
 
