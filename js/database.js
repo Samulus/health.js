@@ -9,15 +9,15 @@ console.log("js/database.js [✓]");
   /* Public */
   top.Database = {
 
-    Read: function(day_stamp) {
-      var item = localStorage.getItem(day_stamp);
+    Read: function(day) {
+      var item = localStorage.getItem(day);
       if (item === null) return null;
-      db[day_stamp] = JSON.parse(item);
-      return db[day_stamp];
+      db[day] = JSON.parse(item);
+      return db[day];
     },
 
-    Write: function(day_stamp) {
-      localStorage.setItem(day_stamp, JSON.stringify(db[day_stamp]));
+    Write: function(day) {
+      localStorage.setItem(day, JSON.stringify(db[day]));
     },
 
     Add: function(entry, day, stamp) {
@@ -40,6 +40,7 @@ console.log("js/database.js [✓]");
       }
 
       db[day][stamp] = entry;
+      Database.Write(day);
       return db[day];
 
     },
@@ -48,14 +49,17 @@ console.log("js/database.js [✓]");
       if (stamp in db[day]) {
         delete db[day][stamp]; 
       }
+      Database.Write(day);
     },
 
     Entry: function(day, stamp) {
+      Database.Read(day); 
       if (stamp in db[day]) 
         return db[day][stamp];
     },
 
     Day: function(day) {
+      Database.Read(day);
       if (day in db) 
         return db[day];
     },
@@ -73,7 +77,6 @@ console.log("js/database.js [✓]");
 
       return out;
     }
-
 
   };
 

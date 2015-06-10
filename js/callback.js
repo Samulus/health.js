@@ -33,6 +33,7 @@ console.log("js/callback.js [✓]");
 
   /* Time —  Updates DB on time changes */
   Time.Callback = function(day) {
+    console.log(day);
     Food.Switch(Database.Day(day), Database.Totals(day));
   };
 
