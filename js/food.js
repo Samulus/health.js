@@ -3,28 +3,21 @@ console.log("js/food.js [✓]");
 
   /* Templates / HTML Scoping */
   var scope  = document.querySelector("div[data-scope='food']");
-  var inject = scope.querySelector("div[data-scope='inject']");
+  var inject = scope.querySelector("inject");
   var entry_tmpl = scope.querySelector("template[data-template='entry']");
   var total_tmpl = scope.querySelector("template[data-template='total']");
-  
+
   /* Private */
   var self = {
     loaded: {},
 
-    /* TODO: clean this up */
+    /* Updates Totals */ 
     total: function(totals) {
-      if (scope.querySelector("div[data-scope='total']") == null) {
-        if (Object.keys(totals).length === 0) {
-          inject.insertAdjacentHTML("afterend", tim(total_tmpl.innerHTML, {"calories": 0, "protein": 0}));
-        } else {
-          inject.insertAdjacentHTML("afterend", tim(total_tmpl.innerHTML, totals));
-        }
-      } else {
-        if (Object.keys(totals).length === 0) {
-          scope.querySelector("div[data-scope='total']").innerHTML = tim(total_tmpl.innerHTML, {"calories": 0, "protein": 0});
-        } else {
-          scope.querySelector("div[data-scope='total']").innerHTML = tim(total_tmpl.innerHTML, totals);
-        }
+      var insert = scope.querySelector("total");
+      if (Object.keys(totals).length === 0) {
+        insert.innerHTML = tim(total_tmpl.innerHTML, {"calories": 0, "protein": 0});
+      } else{
+        insert.innerHTML = tim(total_tmpl.innerHTML, totals);
       }
     },
 
@@ -85,13 +78,10 @@ console.log("js/food.js [✓]");
 
     Switch: function(db, totals) {
       self.loaded = {};
-      inject.innerHTML = ''; // TODO: this doesn't call the remove method for each bound button, we leaks nao
+      inject.innerHTML = ''; // TODO: this doesn't call the remove method for each bound button
       Food.Add(db, totals);
     },
 
   };
-
-  /* Init */
-  self.total({"calories": 0, "protein": 0});
 
 })();

@@ -1,7 +1,7 @@
 console.log("js/init.js [✓]");
 (function() {
 
-  /* Food */
+  /* Food -- load the present day*/
   (function() {
     var db = Database.Read(Time.Day());
     if (db !== null) {

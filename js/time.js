@@ -1,7 +1,8 @@
 console.log("js/time.js [✓]");
+
 (function() {
   
-  var scope = document.querySelector("div[data-scope='food']");
+  var scope = document.querySelector("div[data-scope='time']");
   var date = scope.querySelector("span[data-scope='date']");
 
   var self = {};
@@ -28,12 +29,8 @@ console.log("js/time.js [✓]");
   };
 
   top.Time = {
-    Day: function() {
-      return self.stamp;
-    },
-    Stamp: function() {
-      return new Date().getTime() / 1000; // always use the present date even when modifying old entries
-    }
+    Day: function() {return self.stamp;}, //  
+    Stamp: function() {return new Date().getTime() / 1000;}
   };
 
   /* Bind */

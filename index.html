@@ -12,85 +12,104 @@
 
   <body>
 
-    <div data-scope='food'> 
-      <div class='left'><i class='fa fa-heartbeat fa-fw section'></i>Food</div>
-
-      <!-- Date -->
-      <div class='right label'>
-        <button data-fn='prev'><i class='fa fa-arrow-circle-left fa-fw'></i></button>
-        <button data-fn='now'><i class='fa fa-calendar-o fa-fw'></i></button>
-        <span data-scope='date'>
-          <script>
-            document.querySelector("div[data-scope='food']").querySelector("span[data-scope='date']").innerHTML 
-            = new Date().toLocaleDateString();
-          </script>
-        </span>
-        <button data-fn='next'><i class='fa fa-arrow-circle-right fa-fw'></i></button>
-      </div>
-      
-      <!-- Legend -->
-      <div class='buffer'></div>
-      <div class='section'>
-        <div class='label pure-g'>
-          <div class='pure-u-5-24'>Item</div>
-          <div class='pure-u-11-24'>Nutrition</div>
-          <div class='pure-u-6-24'>Action</div>
-        </div>
-
-        <!-- Entry Template -->
-        <template class='entry pure-g' data-template='entry'>
-          <div class='pure-u-5-24'>{{name}}</div>
-          <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
-          <div class='pure-u-6-24'>
-            <button data-fn='modify'><i class='fa fa-pencil fa-fw'></i></button>
-            <button data-fn='remove'><i class="fa fa-times-circle fa-fw"></i></button>
-          </div>
-        </template>
-
-        <!-- Total Template -->
-        <template class='label' data-template='total'>
-          <div data-scope='total'>
-            <br>Total: {{calories}} calories / {{protein}} protein
-          </div>
-        </template>
-
-      <!-- Injection Zone -->
-      <div data-scope='inject'></div>
-
-    </div><hr>
+    <!-- Time -->
+    <div data-scope='time'>
+      <h2>
+        <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
+        <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
+        <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().toLocaleDateString()</script></span>
+        <button data-fn='add'><i class='fa fa-plus fa-fw'></i></button>
+        <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
+      </h2>
     </div>
 
-    <div data-scope='modify'>
-      <i class='fa fa-plus-circle fa-fw section'></i>Add / Modify
+    <!-- Menu -->
+    <div data-scope='menu' style='display: visible'>
+      <menu data-scope='menu'>
+        <button class='buffer' href='#food'>
+            <i class='fa fa-cutlery fa-fw'></i> Food</button><br>
+        <button class='buffer' href='analysis'>
+          <i class='fa fa-area-chart fa-fw'></i> Weight Analysis</button><br>
+        <button class='buffer' href='settings'>
+          <i class='fa fa-cogs fa-fw'></i> Settings</button><br>
+        <button class='buffer' href='about'>
+          <i class='fa fa-info-circle fa-fw'></i> About</button><br>
+      </menu>
+    </div>
 
-      <!-- Text Fields -->
-      <form class='pure-form'>
+    <!-- Food -->
+    <div data-scope='food' style='display:none'>
+      <template class='entry pure-g' data-template='entry'>
+        <div class='pure-u-5-24'>{{name}}</div>
+        <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
+        <div class='pure-u-6-24'>
+          <button data-fn='modify'><i class='fa fa-pencil fa-fw'></i></button>
+          <button data-fn='remove'><i class="fa fa-times-circle fa-fw"></i></button>
+        </div>
+      </template>
+      <template class='label' data-template='total'>
+        <div data-scope='total'>
+          <br>Total: {{calories}} calories / {{protein}} protein
+        </div>
+      </template>
+      <div class='entry pure-g'>
+        <div class='pure-u-5-24'>Item</div>
+        <div class='pure-u-10-24'>Nutrition</div>
+        <div class='pure-u-6-24'>Action</div>
+        <hr>
+        <inject></inject>
+      </div>
+      <total class='entry'></total>
+    </div>
+
+    <!-- Add -->
+    <div data-scope='add' style='display: none'>
+      <form class='padding pure-form'>
         <fieldset class="pure-group fields" data-scope='stats'>
           <input type="text"   class="pure-input-1" placeholder='Name'>
           <input type="number" class="pure-input-1" placeholder='Calories' pattern="[\d]*">
           <input type="number" class="pure-input-1" placeholder='Protein' pattern="[\d]*">
         </fieldset>
-
         <div class='pure-g'>
-          <div class='pure-u-11-24'><button type='button' class="pure-button pure-input-1 affirm" data-fn='modify'>Add / Modify</button></div>
-          <div class='pure-u-1-24'></div> <!-- Buffer -->
+          <div class='pure-u-11-24'><button type='button' class="pure-button pure-input-1 affirm" data-fn='add'>Add</button></div>
+          <div class='pure-u-1-24'></div> 
           <div class='pure-u-12-24'><button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button></div>
         </div>
-
       </form>
-      <!-- Invisi Div for Modifications -->
-        <div data-scope='stamp' data-stamp=''></div>
-      </div>
-
+    </div>
+    
+    <!-- Modify -->
+    <div data-scope='modify' style='display: none'>
+      <form class='padding pure-form'>
+        <fieldset class="pure-group fields" data-scope='stats'>
+          <input type="text"   class="pure-input-1" placeholder='Name'>
+          <input type="number" class="pure-input-1" placeholder='Calories' pattern="[\d]*">
+          <input type="number" class="pure-input-1" placeholder='Protein' pattern="[\d]*">
+        </fieldset>
+        <div class='pure-g'>
+          <div class='pure-u-11-24'><button type='button' class="pure-button pure-input-1 affirm" data-fn='modify'>Modify</button></div>
+          <div class='pure-u-1-24'></div> 
+          <div class='pure-u-12-24'><button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button></div>
+        </div>
+      </form>
     </div>
 
+
     <script src='js/lib/tinytim.min.js'></script>
-    <script src='js/modify.js'></script>
-    <script src='js/food.js'></script>
-    <script src='js/database.js'></script>
+    <script src='js/lib/routie.min.js'></script>
+    <script src='js/view.js'></script>
+    <script src='js/menu.js'></script>
     <script src='js/time.js'></script>
-    <script src='js/callback.js'></script>
+    <script src='js/add.js'></script>
+    <script src='js/database.js'></script>
+    <script src='js/food.js'></script>
     <script src='js/init.js'></script>
+    <script src='js/callback.js'></script>
+
+    <script>
+      window.location = '#menu';
+      routie('*', function(name) {View(name);});
+    </script>
 
   </body>
 </html>
