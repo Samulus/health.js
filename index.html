@@ -12,8 +12,27 @@
 
   <body>
 
+    <!-- Navbar -->
+    <nav>
+      <span class='title'>
+          <button class='buffer' href='#menu'>
+            <i class='fa fa-bars fa-fw'></i></button>
+        <span>health.js</span>
+      </span>
+
+      <span class='time'>
+        <div data-scope='time'>
+            <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
+            <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
+            <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().toLocaleDateString()</script></span>
+            <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
+            <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
+        </div>
+      </span>
+    </nav>
+
     <!-- Menu -->
-    <div data-scope='menu' style='display: visible'>
+    <div data-scope='menu' style='display: visible' class='rounded'>
       <menu data-scope='menu'>
         <button class='buffer' href='#food'>
             <i class='fa fa-cutlery fa-fw'></i> Food</button><br>
@@ -29,43 +48,38 @@
     <!-- Food -->
     <div data-scope='food' style='display:none'>
 
-        <!-- Time -->
-        <div data-scope='time'>
-          <h2>
-            <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
-            <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
-            <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().toLocaleDateString()</script></span>
-            <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
-            <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
-          </h2>
-        </div>
-
       <template class='entry pure-g' data-template='entry'>
-        <div class='pure-u-5-24'>{{name}}</div>
-        <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
-        <div class='pure-u-6-24'>
-          <button data-fn='modify'><i class='fa fa-pencil fa-fw'></i></button>
-          <button data-fn='remove'><i class="fa fa-times-circle fa-fw"></i></button>
+        <div class='rounded'>
+          <div class='pure-u-5-24'>{{name}}</div>
+          <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
+          <div class='pure-u-6-24'>
+            <button data-fn='modify'><i class='fa fa-pencil fa-fw'></i></button>
+            <button data-fn='remove'><i class="fa fa-times-circle fa-fw"></i></button>
+          </div>
         </div>
       </template>
 
       <template class='label' data-template='total'>
         <div data-scope='total'>
-          <br>Total: {{calories}} calories / {{protein}} protein
+          Total: {{calories}} calories / {{protein}} protein
         </div>
       </template>
 
-      <div class='entry pure-g'>
-        <div class='pure-u-5-24'>Item</div>
-        <div class='pure-u-10-24'>Nutrition</div>
-        <div class='pure-u-6-24'>Action</div>
+        <div class='entry pure-g thin'>
+          <div class='rounded'>
+          <div class='pure-u-5-24'>Item</div>
+          <div class='pure-u-10-24'>Nutrition</div>
+          <div class='pure-u-6-24'>Action</div>
+        </div>
         <inject></inject>
       </div>
-      <total class='entry'></total>
+      <total class="entry"></total>
+
+
     </div>
 
     <!-- Edit -->
-    <div data-scope='edit' style='display: none'>
+    <div data-scope='edit' style='display: none' class='rounded'>
       <form class='padding pure-form'>
         <fieldset class="pure-group fields" data-scope='stats'>
           <input type="text"   class="pure-input-1" placeholder='Name'>
@@ -97,7 +111,7 @@
     <script src='js/food.js'></script>
 
     <script>
-      /* routing */ window.location = '#menu';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
       /* startup */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 
