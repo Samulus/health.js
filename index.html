@@ -66,8 +66,7 @@
           Total: {{calories}} calories / {{protein}} protein
         </div>
       </template>
-
-        <div class='entry pure-g thin'>
+        <div class='entry pure-u-g thin'>
           <div class='rounded'>
           <div class='pure-u-5-24'>Item</div>
           <div class='pure-u-10-24'>Nutrition</div>
@@ -128,7 +127,7 @@
     <script src='js/food.js'></script>
 
     <script>
-      /* routing */ window.location = '#menu';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
       /* startup */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 

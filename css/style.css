@@ -66,11 +66,6 @@ button::-moz-focus-inner {
 
 }
 
-.thin {
-  font-family: "Fira Sans Hair" !important;
-  font-weight: 100 !important;
-
-}
 
 .buffer {
   padding-bottom:1em;
