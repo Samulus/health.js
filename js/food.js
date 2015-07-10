@@ -2,16 +2,17 @@ console.log("js/food.js [✓]");
 (function() {
 
   /* Templates / HTML Scoping */
-  var scope  = document.querySelector("div[data-scope='food']");
+  var scope = document.querySelector("div[data-scope='food']");
   var inject = scope.querySelector("inject");
   var entry_tmpl = scope.querySelector("template[data-template='entry']");
   var total_tmpl = scope.querySelector("template[data-template='total']");
 
   /* Private */
   var self = {
+
     loaded: {},
 
-    /* Updates Totals */ 
+    /* View */
     total: function(totals) {
       var insert = scope.querySelector("total");
       if (Object.keys(totals).length === 0) {
@@ -21,13 +22,58 @@ console.log("js/food.js [✓]");
       }
     },
 
-    rebind: function(node, stamp) {
-      var removeNode = node.querySelector("button[data-fn='remove']");
-      var modifyNode = node.querySelector("button[data-fn='modify']");
-      removeNode.setAttribute('data-stamp', stamp);
-      modifyNode.setAttribute('data-stamp', stamp);
-      removeNode.onclick = self.remove;
-      modifyNode.onclick = self.modify;
+    add: function(db, totals) {
+      for (var key in db) {
+        if (!(key in self.loaded)) {
+          inject.insertAdjacentHTML("beforeend", "<div data-stamp="+key+"></div>");
+          var node = inject.querySelector("div[data-stamp='"+key+"']");
+          node.insertAdjacentHTML("beforeend", tim(entry_tmpl.innerHTML, db[key]));
+          self.bind(node, key);
+          self.loaded[key] = true;
+        }
+      }
+      self.total(totals);
+    },
+
+    modify: function(db, stamp, totals) {
+      var node = inject.querySelector("div[data-stamp='"+stamp+"']");
+      node.innerHTML = tim(entry_tmpl.innerHTML, db[stamp]);
+      self.bind(node, stamp);
+      self.total(totals);
+    },
+
+    reload: function(db, totals) {
+      self.loaded = {};
+      inject.innerHTML = '';
+      self.add(db, totals);
+    },
+    
+    /* Binds */
+    bind: function(node, stamp) {
+      var remove = node.querySelector("button[data-fn='remove']");
+      var modify = node.querySelector("button[data-fn='modify']");
+      remove.setAttribute('data-stamp', stamp);
+      modify.setAttribute('data-stamp', stamp);
+
+      remove.onclick = function(e) {
+        var stamp = e.currentTarget.getAttribute('data-stamp');
+        var node = inject.querySelector("div[data-stamp='"+stamp+"']");
+        self.unbind(node, stamp);
+        node.parentElement.removeChild(node);
+        Database.Remove(Time.Day(), stamp);
+        self.total(Database.Totals(Time.Day()));
+      };
+
+      modify.onclick = function(e) {
+        var stamp = e.currentTarget.getAttribute('data-stamp');
+        var data = {};
+        data.entry = Database.Entry(Time.Day(), stamp);
+        data.stamp = stamp;
+        View('edit', data);
+        var totals = Database.Totals(Time.Day());
+        self.total(totals);
+      };
+
     },
 
     unbind: function(node, stamp) {
@@ -37,51 +83,17 @@ console.log("js/food.js [✓]");
       delete modifyNode.onclick;
     },
 
-    remove: function(e) {
-      var stamp = e.currentTarget.getAttribute('data-stamp');
-      var node = inject.querySelector("div[data-stamp='"+stamp+"']");
-      self.unbind(node, stamp);
-      node.parentElement.removeChild(node);
-      var totals = Food.Callback("remove", stamp);
-      self.total(totals);
-    },
-
-    modify: function(e) {
-      var stamp = e.currentTarget.getAttribute('data-stamp');
-      var totals = Food.Callback("modify", stamp);
-      self.total(totals);
-    }
   };
 
   /* Public */
   top.Food = { 
-
-    Add: function(db, totals) {
-      for (var key in db) {
-        if (!(key in self.loaded)) {
-          inject.insertAdjacentHTML("beforeend", "<div data-stamp="+key+"></div>");
-          var node = inject.querySelector("div[data-stamp='"+key+"']");
-          node.insertAdjacentHTML("beforeend", tim(entry_tmpl.innerHTML, db[key]));
-          self.rebind(node, key);
-          self.loaded[key] = true;
-        }
+    Global: function(data) {
+      switch (data.mode) {
+        case "add": self.add(data.db, data.totals); break;
+        case "modify": self.modify(data.db, data.stamp, data.totals); break;
+        case "reload": self.reload(data.db, data.totals); break;
       }
-      self.total(totals);
-    },
-
-    Modify: function(db, stamp, totals) {
-      var node = inject.querySelector("div[data-stamp='"+stamp+"']");
-      node.innerHTML = tim(entry_tmpl.innerHTML, db[stamp]);
-      self.rebind(node, stamp);
-      self.total(totals);
-    },
-
-    Switch: function(db, totals) {
-      self.loaded = {};
-      inject.innerHTML = ''; // TODO: this doesn't call the remove method for each bound button
-      Food.Add(db, totals);
-    },
-
+    }
   };
 
 })();

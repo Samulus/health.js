@@ -1,5 +1,8 @@
 console.log("js/time.js [✓]");
 
+/* TODO: only call Time.Event when the time actually changes
+* : ignore multiple home button presses */
+
 (function() {
   
   var scope = document.querySelector("div[data-scope='time']");
@@ -12,20 +15,20 @@ console.log("js/time.js [✓]");
   self.prev= function(e) {
     self.stamp = self.day.setHours(-24,0,0,0) / 1000;
     date.innerHTML = self.day.toLocaleDateString();
-    Time.Callback(self.stamp);
+    Time.Event(self.stamp);
   };
 
   self.now= function(e) {
     self.day = new Date();
     self.stamp = self.day.setHours(0,0,0,0) / 1000;
     date.innerHTML = self.day.toLocaleDateString();
-    Time.Callback(self.stamp);
+    Time.Event(self.stamp);
   };
 
   self.next= function(e) {
     self.stamp = self.day.setHours(24,0,0,0) / 1000;
     date.innerHTML = self.day.toLocaleDateString();
-    Time.Callback(self.stamp);
+    Time.Event(self.stamp);
   };
 
   top.Time = {
@@ -33,9 +36,12 @@ console.log("js/time.js [✓]");
     Stamp: function() {return new Date().getTime() / 1000;}
   };
 
-  /* Bind */
-  scope.querySelector("button[data-fn='prev']").onclick = self.prev;
-  scope.querySelector("button[data-fn='now']").onclick = self.now;
-  scope.querySelector("button[data-fn='next']").onclick = self.next;
+  /* Binds */
+  var time = document.querySelector("div[data-scope='time']");
+  time.querySelector("button[data-fn='edit']").onclick = function(e) {View('edit');};
+  time.querySelector("button[data-fn='prev']").onclick = self.prev;
+  time.querySelector("button[data-fn='now']").onclick = self.now;
+  time.querySelector("button[data-fn='next']").onclick = self.next;
+
 
 })();

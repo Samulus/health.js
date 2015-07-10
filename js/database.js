@@ -1,10 +1,16 @@
 console.log("js/database.js [✓]");
+
+/* Remotestorage */
+(function() {
+  RemoteStorage.defineModule('health.js', function(pub, priv) {
+  });
+})();
+
+/* Local DB */
 (function() {
 
   /* Private */
   var db = {};
-
-  top.DEBUG = db;
 
   /* Public */
   top.Database = {
