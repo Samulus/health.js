@@ -1,5 +1,5 @@
 html, body {
-  font-family: "Fira Sans UltraLight", "Helvectia Neue", sans-serif;
+  font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
   background-color:#E3E3E3;
   margin:0;
   padding:0;
@@ -24,11 +24,11 @@ nav {
   z-index: 3000;
   position:relative;
   height:2.5em;
-  background-color:#2B9;
+  background-color:#334455
 }
 
 button {
-  margin:-0.5em;
+  margin:-0.4em;
   border:none;
   background:none;
 }
@@ -63,6 +63,7 @@ button::-moz-focus-inner {
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   border-radius:6px;
   background-color:#FFFFFF;
+
 }
 
 .thin {

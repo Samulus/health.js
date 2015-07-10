@@ -1,21 +1,71 @@
 console.log("js/database.js [✓]");
 
-/* Remotestorage */
+/*
 (function() {
-  RemoteStorage.defineModule('health.js', function(pub, priv) {
+  RemoteStorage.defineModule('health', function(priv, pub) {
+
+    var local_db = null;
+
+    top.DEBUG = {
+      priv: priv, pub: pub
+    };
+
+    priv.declareType('health', {
+      'properties': {
+        'db': 'object'
+      }
+    });
+
+    priv.cache('');
+
+    priv.on('change', function(e) {
+      if (e.relativePath === 'db') {
+        local_db = e.newValue;
+      }
+    });
+
+    return {
+      exports: {
+        write: function(db) {
+          return priv.storeObject('health', 'db', {db: db});
+        },
+        read: function() {
+        if (local_db !== null)
+          return local_db;
+        return null;
+        },
+        getDay: function(day) {
+          if (local_db !== null)
+            return local_db[day];
+          return null;
+        }
+      }
+    };
+
   });
+
+  remoteStorage.access.claim('health', 'rw');
 })();
+*/
 
 /* Local DB */
 (function() {
 
+
+
   /* Private */
   var db = {};
+  top.DEBUG = db;
 
   /* Public */
   top.Database = {
 
+    Connect: function(email) {
+      /*  TODO: bridge to RemoteStorage */
+    },
+
     Read: function(day) {
+      //var item = remoteStorage.health.getDay(day);
       var item = localStorage.getItem(day);
       if (item === null) return null;
       db[day] = JSON.parse(item);
@@ -24,6 +74,7 @@ console.log("js/database.js [✓]");
 
     Write: function(day) {
       localStorage.setItem(day, JSON.stringify(db[day]));
+      //remoteStorage.health.write(db);
     },
 
     Add: function(entry, day, stamp) {

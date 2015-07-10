@@ -5,7 +5,7 @@ console.log("js/menu.js [✓]");
 
   /* Menu */
   scope.querySelector("button[href='#food']").onclick = function() {View('food');};
-  /* TODO: remaining buttons */
+  scope.querySelector("button[href='#settings']").onclick = function() {View('settings');};
 
 
 })();
