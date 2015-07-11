@@ -8,6 +8,11 @@ html, body {
   width:100%;
 } 
 
+/* prevent font overlapping */
+.pure-g [class *= "pure-u"] {
+    font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
+}
+
 body {
   position:relative;
   -webkit-font-smoothing:antialiased;
