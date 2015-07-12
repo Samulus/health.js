@@ -10,6 +10,8 @@
     <title>health.js</title>
   </head>
 
+  <script src='js/lib/prototype.js'></script>
+
   <body>
 
     <!-- Navbar -->
@@ -24,7 +26,7 @@
         <div data-scope='time'>
             <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
             <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
-            <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().toLocaleDateString()</script></span>
+            <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().mdy()</script></span>
             <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
             <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
         </div>

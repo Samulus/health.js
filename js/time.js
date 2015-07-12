@@ -14,20 +14,20 @@ console.log("js/time.js [✓]");
 
   self.prev= function(e) {
     self.stamp = self.day.setHours(-24,0,0,0) / 1000;
-    date.innerHTML = self.day.toLocaleDateString();
+    date.innerHTML = self.day.mdy();
     Time.Event(self.stamp);
   };
 
   self.now= function(e) {
     self.day = new Date();
     self.stamp = self.day.setHours(0,0,0,0) / 1000;
-    date.innerHTML = self.day.toLocaleDateString();
+    date.innerHTML = self.day.mdy();
     Time.Event(self.stamp);
   };
 
   self.next= function(e) {
     self.stamp = self.day.setHours(24,0,0,0) / 1000;
-    date.innerHTML = self.day.toLocaleDateString();
+    date.innerHTML = self.day.mdy();
     Time.Event(self.stamp);
   };
 
