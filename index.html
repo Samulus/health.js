@@ -38,12 +38,6 @@
             <i class='fa fa-cutlery fa-fw'></i> Food</button><br>
         <button class='buffer' href='#settings'>
           <i class='fa fa-cogs fa-fw'></i> Settings</button><br>
-          <!--
-        <button class='buffer' href='#analysis'>
-          <i class='fa fa-area-chart fa-fw'></i> Weight Analysis</button><br>
-        <button class='buffer' href='#about'>
-          <i class='fa fa-info-circle fa-fw'></i> About</button><br>
-          -->
       </menu>
     </div>
 
@@ -87,12 +81,12 @@
           <input type="number" class="pure-input-1" placeholder='Calories' pattern="[\d]*">
           <input type="number" class="pure-input-1" placeholder='Protein' pattern="[\d]*">
         </fieldset>
-        <div class='pure-g'>
-          <div class='pure-u-11-24'><button type='button' class="pure-button pure-input-1 affirm" data-fn='edit'>Add / Modify</button></div>
-          <div class='pure-u-1-24'></div> 
-          <div class='pure-u-12-24'><button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button></div>
-        </div>
       </form>
+      <div class='button_pad'>
+        <button type='button' class="pure-button pure-input-1 affirm" data-fn='edit'>Add / Modify</button>
+        <button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button>
+      </div>
+
     </div>
 
     <!-- Settings -->
@@ -127,7 +121,7 @@
     <script src='js/food.js'></script>
 
     <script>
-      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#edit';  routie('*', function(name) {View(name);});
       /* startup */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 

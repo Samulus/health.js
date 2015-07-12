@@ -43,15 +43,15 @@ button::-moz-focus-inner {
 
 /* Topbar */
 .title {
-  margin-left:0.9em;
-  margin-right:0.9em;
+  margin-left:0.2em;
+  margin-right:0.2em;
   padding-top:0.5em;
   text-align:center;
   float:left;
 }
 
 .time {
-  padding-right:0.5em;
+  padding-right:0.2em;
   padding-top:0.5em;
   float:right;
 }
@@ -71,8 +71,14 @@ button::-moz-focus-inner {
   padding-bottom:1em;
 }
 
+.button_pad {
+  padding-left:1.2em;
+  padding-right:0.5em;
+}
+
 .padding {
   padding: 0.8em;
+  padding-bottom:0em;
 }
 
 .entry {
@@ -83,9 +89,14 @@ button::-moz-focus-inner {
 .affirm {
   background-color:#79BD8F;
   color:#F2F2F2;
+  display: block;
+  width:100%;
+  margin-bottom:0.8em;
 }
 
 .cancel {
   background-color:#1F8DD6;
   color:#F2F2F2;
+  display: block;
+  width:100%;
 }
