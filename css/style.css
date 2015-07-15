@@ -73,6 +73,7 @@ button::-moz-focus-inner {
 
 .buffer {
   padding-bottom:1em;
+  padding-left:.75em;
 }
 
 .button_pad {
