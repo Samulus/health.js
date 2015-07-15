@@ -2,17 +2,14 @@
 
   var self = {};
   self.prev = null;
+  self.blacklist = ['debug', 'nav'];
 
   top.View = function(name, data) {
     window.location = '#' + name;
 
-    /* Avoid Unnecessary Reloads -- fix */
-    //if (self.prev !== null && window.location === self.prev)
-      //return;
-
     /* 404 */
     var requested = document.querySelector("div[data-scope='"+name+"']");
-    if (requested === null) return;
+    if (requested === null || name in self.blacklist) return;
 
     /* Preload */
     if (typeof data !== "undefined") {
@@ -26,9 +23,7 @@
     var node = document.querySelector("div[style='display: visible']");
     if (node !== null)
       node.setAttribute('style', 'display: none');
-
     requested.setAttribute('style', 'display: visible');
-    //self.prev = window.location;
   };
 
 })();

@@ -15,7 +15,7 @@
   <body>
 
     <!-- Navbar -->
-    <nav>
+    <nav data-scope='nav'>
       <span class='title'>
         <button class='buffer' href='#menu'>
             <i class='fa fa-bars fa-fw'></i></button>
@@ -119,6 +119,7 @@
     <script src='js/menu.js'></script>
     <script src='js/edit.js'></script>
     <script src='js/food.js'></script>
+    <script src='js/nav.js'></script>
 
     <script>
       /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
