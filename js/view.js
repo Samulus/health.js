@@ -25,9 +25,9 @@
     /* Hide Previous */
     var node = document.querySelector("div[style='display: visible']");
     if (node !== null)
-      node.setAttribute('style', "display: none");
+      node.setAttribute('style', 'display: none');
 
-    requested.setAttribute('style', "display: visible");
+    requested.setAttribute('style', 'display: visible');
     //self.prev = window.location;
   };
 
