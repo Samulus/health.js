@@ -21,6 +21,7 @@ body {
   -moz-user-select:none;
   user-select:none;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-appearance: none
 }
 
 nav {
@@ -32,18 +33,19 @@ nav {
 }
 
 button {
-  margin:-0.4em;
+  margin:-0.2em;
   border:none;
   background:none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 input {
   background-color:#EEEEEE;
 }
 
-button::-moz-focus-inner {
-  border: 0;
-}
 
 /* Topbar */
 .title {

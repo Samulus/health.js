@@ -123,7 +123,7 @@
     <script src='js/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#settings';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
       /* startup */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 
