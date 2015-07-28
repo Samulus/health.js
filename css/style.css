@@ -6,7 +6,13 @@ html, body {
   outline:0;
   height:100%;
   width:100%;
+  box-sizing: content-box;
 } 
+
+input[type="*"] {
+-webkit-appearance : none;
+    border-radius      : 0;
+  }
 
 /* prevent font overlapping */
 .pure-g [class *= "pure-u"] {
@@ -33,7 +39,7 @@ nav {
 }
 
 button {
-  margin:-0.2em;
+  margin:-0.5em;
   border:none;
   background:none;
 }
@@ -81,6 +87,10 @@ input {
 .button_pad {
   padding-left:1.2em;
   padding-right:0.5em;
+}
+
+.left_bounce {
+  margin-left:-0.2em;
 }
 
 .padding {

@@ -20,7 +20,7 @@
 
       <span class='time'>
         <div data-scope='time'>
-            <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
+          <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
             <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
             <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().mdy()</script></span>
             <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
@@ -41,21 +41,36 @@
 
     <!-- Settings -->
     <div data-scope='settings' style='display: none'>
-      <form class='padding pure-form'>
-        <fieldset class="pure-group fields" data-scope='stats'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Name'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Age'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Weight'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Height'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Inches'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Gender'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Current Weight'>
-          <input type="text"   class="pure-input-1" data-type='rs' placeholder='Target Weight'>
-        </fieldset>
-      </form>
-      <div class='button_pad'>
-        <button type='button' class="pure-button pure-input-1 affirm" data-fn='edit'>Apply</button>
-        <button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button>
+      <p style='text-align:center'>(Harris Benedict Equation)</p>
+        <div class='rounded'>
+          <form class='padding left_bounce pure-form pure-g'>
+            <div class='pure-u-1'><input type="number" class="pure-input-1" data-type='weight' placeholder='Weight (lbs)'></div>
+            <div class='pure-u-1'><input type="number" class="pure-input-1" data-type='target' placeholder='Target Weight (lbs)'></div>
+            <div class='pure-u-1'><input type="number" class="pure-input-1" data-type='age' placeholder='Age'></div>
+            <div class='pure-u-1-2'><input type="number" class="pure-input-1" data-type='ft' placeholder='Height (ft)'></div>
+            <div class='pure-u-1-2'><input type="number" class="pure-input-1" data-type='in' placeholder='Height (in)'></div>
+            <div class='pure-u-1-2'><label for='female' class='pure-radio'>
+                <input type='radio' name='female'></input> Female</label>
+            </div>
+            <div class='pure-u-1-2'><label for='male' class='pure-radio'>
+                <input type='radio' name='male'></input> Male</label>
+            </div>
+            <div class="pure-u-1">
+            <label for="state">Activity Level</label>
+              <select class="pure-input-1">
+              <option>Sedentary</option>
+              <option>Lightly Active</option>
+              <option>Moderately Active</option>
+              <option>Extremly Active</option>
+            </select>
+          </form>
+          </div>
+        </div>
+
+        <div class='padding button_pad'>
+          <button type='button' class="pure-button pure-input-1 affirm" data-fn='apply'>Apply</button>
+          <button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button>
+        </div>
       </div>
     </div>
 
@@ -93,9 +108,9 @@
     <div data-scope='edit' style='display:none;'>
       <form class='padding pure-form'>
         <fieldset class="pure-group fields" data-scope='stats'>
-          <input type="text"   class="pure-input-1" placeholder='Name'>
-          <input type="number" class="pure-input-1" placeholder='Calories' pattern="[\d]*">
-          <input type="number" class="pure-input-1" placeholder='Protein' pattern="[\d]*">
+          <input type="text"   class="pure-input-1" data-type='name' placeholder='Name'>
+          <input type="number" class="pure-input-1" data-type='calories' placeholder='Calories' pattern="[\d]*">
+          <input type="number" class="pure-input-1" data-type='protein' placeholder='Protein' pattern="[\d]*">
         </fieldset>
       </form>
       <div class='button_pad'>
@@ -118,12 +133,13 @@
 
     <!-- module -->
     <script src='js/menu.js'></script>
+    <script src='js/settings.js'></script>
     <script src='js/edit.js'></script>
     <script src='js/food.js'></script>
     <script src='js/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#settings';  routie('*', function(name) {View(name);});
       /* startup */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 

@@ -4,15 +4,22 @@ console.log("js/settings [✓]");
 
   var scope = document.querySelector("div[data-scope='settings']");
 
-  /* Binds */
-  scope.querySelector("button[data-fn='connect']").onclick = function(e) {
-    var input = scope.querySelector("input[data-type='rs']").value;
-    Database.Connect(input); /* TODO */
-    
+  var self = {};
+  top.Settings = {};
+
+  self.preload = function(data) {
   };
 
-  scope.querySelector("button[data-fn='disconnect']").onclick = function(e) {
-    /* lol */
+  self.sanitize = function() {
   };
+
+  // @data = {'settings': json}
+  Settings.Global = function(data) { 
+    if (data !== null) self.preload(data);
+  };
+
+  /* Binds */
+  scope.querySelector("button[data-fn='apply']").onclick = function(e) {self.sanitize();};
+  scope.querySelector("button[data-fn='cancel']").onclick = function(e) {window.history.back();};
 
 })();

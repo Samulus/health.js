@@ -24,7 +24,7 @@ console.log("js/edit.js [✓]");
 
     /* Verify Numbers are Inputted */
     for (var i=0; i < stats.children.length; ++i) {
-      var id = stats.children[i].getAttribute('placeholder').toLowerCase();
+      var id = stats.children[i].getAttribute('data-type');
       if (stats.children[i].getAttribute('type') === "number" && 
           isNaN(parseFloat(stats.children[i].value))) {
         error = true;
