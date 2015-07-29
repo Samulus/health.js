@@ -14,8 +14,8 @@
     /* Preload */
     if (typeof data !== "undefined") {
       switch (name) {
-        case 'edit': Edit.Global(data); break;
-        case 'food': Food.Global(data); break;
+        case 'edit':     Edit.Global(data); break;
+        case 'food':     Food.Global(data); break;
         case 'settings': Settings.Global(data); break;
       }
     }

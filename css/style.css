@@ -1,25 +1,9 @@
+/* Core */
 html, body {
   font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
   background-color:#E3E3E3;
   margin:0;
   padding:0;
-  outline:0;
-  height:100%;
-  width:100%;
-  box-sizing: content-box;
-} 
-
-input[type="*"] {
--webkit-appearance : none;
-    border-radius      : 0;
-  }
-
-/* prevent font overlapping */
-.pure-g [class *= "pure-u"] {
-    font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
-}
-
-body {
   position:relative;
   -webkit-font-smoothing:antialiased;
   -webkit-text-size-adjust:none;
@@ -28,7 +12,7 @@ body {
   user-select:none;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
   -webkit-appearance: none
-}
+} 
 
 nav {
   color:#F4FFFF;
@@ -48,10 +32,22 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-input {
+/*
+ * Pure CSS Adjustments
+ */
+
+.pure-form select, input {
+  color:#000000;
   background-color:#EEEEEE;
 }
 
+.pure-g [class *= "pure-u"] {
+    font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
+}
+
+/*
+ * Sections
+ */
 
 /* Topbar */
 .title {
@@ -84,21 +80,19 @@ input {
   padding-left:.75em;
 }
 
-.button_pad {
-  padding-left:1.2em;
-  padding-right:0.5em;
-}
-
-.left_bounce {
-  margin-left:-0.2em;
-}
-
+/* Padding */
 .padding {
   padding: 0.8em;
   padding-bottom:0em;
 }
 
-.entry {
+.button_pad {
+  padding:0.8em;
+  padding-left:1.3em;
+  padding-right:0.2em;
+}
+
+.center {
   text-align:center;
 }
 
@@ -116,4 +110,17 @@ input {
   color:#F2F2F2;
   display: block;
   width:100%;
+}
+
+
+/* Weight Analysis */
+._a {
+  height:50%;
+  background-color:#5c9194;
+}
+
+._week {
+  font-size: 3em;
+  font-family: "Fira Sans Eight", "Helvectia Neue", sans-serif;
+  color: #FFFFFF;
 }
