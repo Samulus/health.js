@@ -1,15 +1,17 @@
-/* Core */
+/*
+ * Core
+ */
 html, body {
   font-family: "Fira Sans ExtraLight", "Helvectia Neue", sans-serif;
   background-color:#E3E3E3;
   margin:0;
   padding:0;
   position:relative;
+  user-select:none;
   -webkit-font-smoothing:antialiased;
   -webkit-text-size-adjust:none;
   -webkit-user-select:none;
   -moz-user-select:none;
-  user-select:none;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
   -webkit-appearance: none
 } 
@@ -19,17 +21,13 @@ nav {
   z-index: 3000;
   position:relative;
   height:2.5em;
-  background-color:#334455
+  background-color:#55a17d;
 }
 
 button {
   margin:-0.5em;
   border:none;
   background:none;
-}
-
-button::-moz-focus-inner {
-  border: 0;
 }
 
 /*
@@ -49,7 +47,6 @@ button::-moz-focus-inner {
  * Sections
  */
 
-/* Topbar */
 .title {
   margin-left:0.2em;
   margin-right:0.2em;
@@ -64,7 +61,10 @@ button::-moz-focus-inner {
   float:right;
 }
 
-/* Visual Elements */
+/*
+ * Visual Elements
+ */
+
 .rounded {
   margin:16px;
   padding:8px;
@@ -74,29 +74,6 @@ button::-moz-focus-inner {
 
 }
 
-
-.buffer {
-  padding-bottom:1em;
-  padding-left:.75em;
-}
-
-/* Padding */
-.padding {
-  padding: 0.8em;
-  padding-bottom:0em;
-}
-
-.button_pad {
-  padding:0.8em;
-  padding-left:1.3em;
-  padding-right:0.2em;
-}
-
-.center {
-  text-align:center;
-}
-
-/* Colors */
 .affirm {
   background-color:#79BD8F;
   color:#F2F2F2;
@@ -112,6 +89,28 @@ button::-moz-focus-inner {
   width:100%;
 }
 
+/*
+ * Padding && Buffers 
+ */
+
+.buffer {
+  padding-bottom:1em;
+  padding-left:.75em;
+}
+.padding {
+  padding: 0.8em;
+  padding-bottom:0em;
+}
+
+.button_pad {
+  padding:0.8em;
+  padding-left:1.3em;
+  padding-right:0.2em;
+}
+
+.center {
+  text-align:center;
+}
 
 /* Weight Analysis */
 ._a {

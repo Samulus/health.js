@@ -17,25 +17,26 @@
     <nav data-scope='nav'>
 
       <span class='title'>
-        <button class='buffer' href='#menu'>
-            <i class='fa fa-bars fa-fw'></i>
-        </button>
+        <button class='buffer' href='#menu'><i class='fa fa-bars fa-fw'></i></button>
       </span>
 
       <span class='time'>
         <div data-scope='time'>
           <button data-fn='prev'><i class='fa fa-angle-double-left fa-fw'></i></button>
-            <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
-            <span data-scope='date'><script>document.querySelector("span[data-scope='date']").innerHTML = new Date().mdy()</script></span>
-            <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
-            <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
+          <button data-fn='now'><i class='fa fa-home fa-fw'></i></button>
+          <span data-scope='date'>
+            <script>document.querySelector("span[data-scope='date']").innerHTML = new Date().mdy()</script>
+          </span>
+          <button data-fn='edit'><i class='fa fa-plus fa-fw'></i></button>
+          <button data-fn='next'><i class='fa fa-angle-double-right fa-fw'></i></button>
         </div>
       </span>
+
     </nav>
 
     <!-- Menu -->
     <div data-scope='menu' class='rounded' style='display: none;'>
-      <menu data-scope='menu'>
+      <menu>
         <button class='buffer' href='#food'>
             <i class='fa fa-cutlery fa-fw'></i> Food</button><br>
         <button class='buffer' href='#analysis'>
@@ -47,16 +48,14 @@
 
     <!-- Analysis -->
     <div data-scope='analysis' style='display: none'>
-
-      <div class='_a'>
-        <div class='_week'>52</div>
-        <hr>
-        <div class='_week'>51 <span><i class='fa fa-child fa-fw'></i></span></div>
-      </div>
+      <marquee>TODO</marquee>
     </div>
 
     <!-- Settings -->
     <div data-scope='settings' style='display: none'>
+
+      <div class='padding'><i class='fa fa-user fa-fw'></i>Biometrics</div>
+      
       <form class='padding pure-form'>
         <fieldset class="pure-group fields" data-scope='stats'>
           <input type="number" class="pure-input-1" data-type='weight' placeholder='Weight (lbs)'>
@@ -80,6 +79,8 @@
         </fieldset>
       </form>
 
+      <!--<div class='padding'><i class='fa fa-paint-brush fa-fw'></i>Interface Settings</div>-->
+
         <div class='button_pad'>
           <button type='button' class="pure-button pure-input-1 affirm" data-fn='apply'>Apply</button>
           <button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button>
@@ -88,7 +89,7 @@
     
     <!-- Food -->
     <div data-scope='food' style='display: visible'>
-      <template class='center pure-g' data-template='entry'>
+      <template data-template='entry'>
         <div class='rounded'>
           <div class='pure-u-5-24'>{{name}}</div>
           <div class='pure-u-10-24'>kcal: {{calories}}<br>protein: {{protein}}<br></div>
@@ -133,15 +134,12 @@
     </div>
 
     </body>
-    
-    <!-- lib -->
+
     <script src='js/lib/routie.min.js'></script>
     <script src='js/lib/tinytim.min.js'></script>
-    <!-- core -->
     <script src='js/core/database.js'></script>
     <script src='js/core/time.js'></script>
     <script src='js/core/view.js'></script>
-    <!-- module -->
     <script src='js/module/menu.js'></script>
     <script src='js/module/settings.js'></script>
     <script src='js/module/analysis.js'></script>
@@ -150,7 +148,7 @@
     <script src='js/module/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#menu';  routie('*', function(name) {View(name);});
       /* init db */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 
