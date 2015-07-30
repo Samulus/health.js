@@ -82,6 +82,14 @@ button {
   margin-bottom:0.8em;
 }
 
+.okay {
+  background-color:#79BD8F;
+  color:#F2F2F2;
+  display: block;
+  width:100%;
+  margin-bottom:0.8em;
+}
+
 .cancel {
   background-color:#1F8DD6;
   color:#F2F2F2;
@@ -96,6 +104,9 @@ button {
 .buffer {
   padding-bottom:1em;
   padding-left:.75em;
+}
+.push_down {
+  padding-bottom:1em;
 }
 .padding {
   padding: 0.8em;

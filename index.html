@@ -48,42 +48,47 @@
 
     <!-- Analysis -->
     <div data-scope='analysis' style='display: none'>
-      <marquee>TODO</marquee>
+      <marquee>👽</marquee>
     </div>
 
     <!-- Settings -->
     <div data-scope='settings' style='display: none'>
 
-      <div class='padding'><i class='fa fa-user fa-fw'></i>Biometrics</div>
+      <div class='padding'><i class='fa fa-user fa-fw'></i>User Info</div>
       
       <form class='padding pure-form'>
-        <fieldset class="pure-group fields" data-scope='stats'>
+        <fieldset class="pure-group fields" data-scope='user_info'>
           <input type="number" class="pure-input-1" data-type='weight' placeholder='Weight (lbs)'>
           <input type="number" class="pure-input-1" data-type='target' placeholder='Target Weight (lbs)'>
           <input type="number" class="pure-input-1" data-type='age' placeholder='Age'>
           <input type="number" class="pure-input-1" data-type='ft' placeholder='Height (ft)'>
           <input type="number" class="pure-input-1" data-type='in' placeholder='Height (in)'>
-          <select class="pure-input-1">
+          <select class="pure-input-1" data-select='gender'>
             <option data-type='default'>[Select Gender]</option>
             <option data-type='male' >Male</option>
             <option data-type='female'>Female</option>
           </select>
-          <select class="pure-input-1">
+          <select class="pure-input-1" data-select='activity'>
             <option data-type='default'>[Select Activity Level]</option>
-            <option data-type='sedentary'>Sedentary (x1.2) </option>
-            <option data-type='light'>Lightly Active (x1.375)</option>
-            <option data-type='moderate'>Moderately Active (x1.55)</option>
-            <option data-type='extreme'>Extremly Active(x1.725)</option>
-            <option data-type='wild'>Life = Wild (x1.9)</option>
+            <option data-type='1.2'>Sedentary (x1.2) </option>
+            <option data-type='1.375'>Lightly Active (x1.375)</option>
+            <option data-type='1.55'>Moderately Active (x1.55)</option>
+            <option data-type='1.725'>Extremly Active(x1.725)</option>
+            <option data-type='1.9'>Life = Wild (x1.9)</option>
           </select>
         </fieldset>
       </form>
+      
+      <div class='padding'><i class='fa fa-user fa-fw'></i>Weight Loss</div><br>
+      
+      <template data-template='bmr'>BMR: {{bmr}} kcal</template>
+      <bmr class='padding'>BMR: Uncalculated 👽</bmr>
 
-      <!--<div class='padding'><i class='fa fa-paint-brush fa-fw'></i>Interface Settings</div>-->
-
-        <div class='button_pad'>
-          <button type='button' class="pure-button pure-input-1 affirm" data-fn='apply'>Apply</button>
-          <button type='button' class="pure-button pure-input-1 cancel" data-fn='cancel'>Cancel</button>
+        <div class='button_pad pure-g'>
+          <div class='pure-u-11-24'><button class="pure-button affirm" data-fn='apply'>Apply</button></div>
+          <div class='pure-u-2-24'></div>
+          <div class='pure-u-11-24'><button class="pure-button okay" data-fn='apply'>Return</button></div>
+          <div class='pure-u-1'><button class="pure-button cancel" data-fn='cancel'>Cancel</button></div>
         </div>
       </div>
     
@@ -137,6 +142,7 @@
 
     <script src='js/lib/routie.min.js'></script>
     <script src='js/lib/tinytim.min.js'></script>
+    <script src='js/lib/util.js'></script>
     <script src='js/core/database.js'></script>
     <script src='js/core/time.js'></script>
     <script src='js/core/view.js'></script>
@@ -148,7 +154,7 @@
     <script src='js/module/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#menu';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#settings';  routie('*', function(name) {View(name);});
       /* init db */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 

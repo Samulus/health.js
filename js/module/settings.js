@@ -2,9 +2,9 @@ console.log("js/settings [✓]");
 
 (function() {
 
-  /* Harris Benedict Equation uses health.js */
-  // BMR Men = 66 + ( 6.2 x weight in pounds ) + ( 12.7 x height in inches ) – ( 6.76 x age in years )
-
+  /* Harris Benedict Equation (1984 Imperial) */
+  // BMR Male:    66 + (6.23 X weight in pounds) + (12.7 X height in inches) – (6.8 X age)
+  // BMR Female: 655 + (4.35 X weight in pounds) + (4.7 X height in inches) – (4.7 X age)
 
   var scope = document.querySelector("div[data-scope='settings']");
 
@@ -12,17 +12,24 @@ console.log("js/settings [✓]");
   top.Settings = {};
 
   self.preload = function(data) {};
-  self.sanitize = function() {
-    
-    var stats = {};
 
-    var scope = docume
-
-    var okay = true;
-    var weight = scope.querySelector("input[data-type='weight']");
-
-    return okay;
+  self.sanitize = function(data) {
+    /* TODO */
+    return data;
   };
+
+  self.calculate = function(data) {
+    var bmr = 0.0;
+
+    alert(JSON.stringify(data));
+    if (data.gender === 'male')
+      bmr += 66  + (6.23 * data.weight) + (12.7 * (data.ft * 12 + data.in)) - (6.8 * data.age);
+    else
+      bmr += 655 + (4.23 * data.weight) + (4.7 * (data.ft * 12  + data.in)) - (4.7 * data.age);
+
+    scope.querySelector("bmr").innerHTML = tim(scope.querySelector("template[data-template='bmr']").innerHTML, {bmr: bmr});
+  };
+
 
   // @data = {'settings': json}
   Settings.Global = function(data) { 
@@ -31,7 +38,14 @@ console.log("js/settings [✓]");
 
   /* Binds */
   scope.querySelector("button[data-fn='apply']").onclick = function(e) {
-    if (self.sanitize()) window.history.back();
+    //var obj = self.sanitize(Util.InputParse(scope.querySelector("fieldset[data-scope='user_info']")));
+    var obj = Util.InputParse(scope.querySelector("fieldset[data-scope='user_info']"));
+    self.calculate(obj);
+
+    if (obj !== null) {
+      /* peachy keen */
+    }
+
   };
   scope.querySelector("button[data-fn='cancel']").onclick = function(e) {window.history.back();};
 
