@@ -11,8 +11,6 @@
     <title>health.js</title>
   </head>
 
-  <!-- Special -->
-
   <body>
 
     <!-- Navbar -->
@@ -143,7 +141,6 @@
     <script src='js/core/database.js'></script>
     <script src='js/core/time.js'></script>
     <script src='js/core/view.js'></script>
-    <script src='js/core/event.js'></script>
     <!-- module -->
     <script src='js/module/menu.js'></script>
     <script src='js/module/settings.js'></script>
@@ -153,7 +150,7 @@
     <script src='js/module/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#settings';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
       /* init db */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 

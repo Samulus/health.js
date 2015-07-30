@@ -13,8 +13,7 @@ integral to health.js's functioning.
 | Library   | Function |
 |-----------|----------|
 | routie.js | Handles '#' routing for multiple views |
-|-----------|----------|
-| tinytim.js | Allows templating for various modules|
+| tinytim.js| Allows templating for various modules |
 |-----------|----------|
 
 

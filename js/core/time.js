@@ -1,6 +1,4 @@
 console.log("js/time.js [✓]");
-/* TODO: only call Time.Event when the time actually changes
-* : ignore multiple home button presses */
 
 (function() {
   
@@ -15,28 +13,24 @@ console.log("js/time.js [✓]");
     Day: function() {return self.stamp;}, //  
     Stamp: function() {return new Date().getTime() / 1000;},
 
-    Prev: function(e, callback) {
+    Prev: function(callback) {
       self.stamp = self.day.setHours(-24,0,0,0) / 1000;
       date.innerHTML = self.day.mdy();
-      Time.Event(self.stamp);
-
-      //callback(self.stamp);
+      callback(self.stamp);
     },
 
-    Now: function(e) {
+    Now: function(callback) {
       self.day = new Date();
       self.stamp = self.day.setHours(0,0,0,0) / 1000;
       date.innerHTML = self.day.mdy();
-      Time.Event(self.stamp);
+      callback(self.stamp);
     },
 
-    Next: function(e) {
+    Next: function(callback) {
       self.stamp = self.day.setHours(24,0,0,0) / 1000;
       date.innerHTML = self.day.mdy();
-      Time.Event(self.stamp);
+      callback(self.stamp);
     },
   };
-
-
 
 })();
