@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/pure-min.css">
     <link rel="stylesheet" href="css/style.css">
     <script src='js/lib/prototype.js'></script>
+    <script src='js/lib/tinytim.min.js'></script>
     <title>health.js</title>
   </head>
 
@@ -79,15 +80,27 @@
         </fieldset>
       </form>
       
-      <div class='padding'><i class='fa fa-user fa-fw'></i>Weight Loss</div><br>
-      
-      <template data-template='bmr'>BMR: {{bmr}} kcal</template>
-      <bmr class='padding'>BMR: Uncalculated 👽</bmr>
+      <div class='padding'><i class='fa fa-user fa-fw'></i>Weight Loss</div>
+
+      <template data-template='calculated'>
+        <div class='rounded'>
+          BMR: {{bmr}} <br>
+          Maintain: {{maintain}} <br>
+          Weight Loss: {{loss}} <br>
+        </div>
+      </template>
+
+      <calculated> 
+        <script> document.querySelector('calculated').innerHTML =
+                 tim(document.querySelector("template[data-template='calculated']").innerHTML, 
+                     {bmr: 0, maintain: 0, loss: 0});
+        </script>
+      </calculated>
 
         <div class='button_pad pure-g'>
           <div class='pure-u-11-24'><button class="pure-button affirm" data-fn='apply'>Apply</button></div>
           <div class='pure-u-2-24'></div>
-          <div class='pure-u-11-24'><button class="pure-button okay" data-fn='apply'>Return</button></div>
+          <div class='pure-u-11-24'><button class="pure-button okay" data-fn='return'>Return</button></div>
           <div class='pure-u-1'><button class="pure-button cancel" data-fn='cancel'>Cancel</button></div>
         </div>
       </div>
@@ -141,7 +154,6 @@
     </body>
 
     <script src='js/lib/routie.min.js'></script>
-    <script src='js/lib/tinytim.min.js'></script>
     <script src='js/lib/util.js'></script>
     <script src='js/core/database.js'></script>
     <script src='js/core/time.js'></script>

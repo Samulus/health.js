@@ -21,12 +21,14 @@ console.log("js/settings [✓]");
   self.calculate = function(data) {
     var bmr = 0.0;
 
-    alert(JSON.stringify(data));
     if (data.gender === 'male')
       bmr += 66  + (6.23 * data.weight) + (12.7 * (data.ft * 12 + data.in)) - (6.8 * data.age);
     else
       bmr += 655 + (4.23 * data.weight) + (4.7 * (data.ft * 12  + data.in)) - (4.7 * data.age);
 
+    var template = scope.querySelector("template[data-template='calculated']");
+    var node = scope.querySelector('calculated');
+    node.innerHTML = tim(template.innerHTML, {bmr: bmr, maintain: bmr * data.activity, loss: (bmr * data.activity) - 500});
     scope.querySelector("bmr").innerHTML = tim(scope.querySelector("template[data-template='bmr']").innerHTML, {bmr: bmr});
   };
 
