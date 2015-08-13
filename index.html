@@ -58,31 +58,29 @@
       <div class='padding'><i class='fa fa-user fa-fw'></i>User Info</div>
       
       <form class='padding pure-form'>
-        <fieldset class="pure-group fields" data-scope='user_info'>
+        <fieldset class="pure-group fields" data-scope='user'>
           <input type="number" class="pure-input-1" data-type='weight' placeholder='Weight (lbs)'>
           <input type="number" class="pure-input-1" data-type='target' placeholder='Target Weight (lbs)'>
           <input type="number" class="pure-input-1" data-type='age' placeholder='Age'>
           <input type="number" class="pure-input-1" data-type='ft' placeholder='Height (ft)'>
           <input type="number" class="pure-input-1" data-type='in' placeholder='Height (in)'>
           <select class="pure-input-1" data-select='gender'>
-            <option data-type='default'>[Select Gender]</option>
             <option data-type='male' >Male</option>
             <option data-type='female'>Female</option>
           </select>
           <select class="pure-input-1" data-select='activity'>
-            <option data-type='default'>[Select Activity Level]</option>
-            <option data-type='1.2'>Sedentary (x1.2) </option>
-            <option data-type='1.375'>Lightly Active (x1.375)</option>
-            <option data-type='1.55'>Moderately Active (x1.55)</option>
-            <option data-type='1.725'>Extremly Active(x1.725)</option>
-            <option data-type='1.9'>Life = Wild (x1.9)</option>
+            <option data-value='1.2'>Sedentary (x1.2) </option>
+            <option data-value='1.375'>Lightly Active (x1.375)</option>
+            <option data-value='1.55'>Moderately Active (x1.55)</option>
+            <option data-value='1.725'>Extremly Active(x1.725)</option>
+            <option data-value='1.9'>Life = Wild (x1.9)</option>
           </select>
         </fieldset>
       </form>
       
       <div class='padding'><i class='fa fa-user fa-fw'></i>Weight Loss</div>
 
-      <template data-template='calculated'>
+      <template data-template='stats'>
         <div class='rounded'>
           BMR: {{bmr}} <br>
           Maintain: {{maintain}} <br>
@@ -90,12 +88,13 @@
         </div>
       </template>
 
-      <calculated> 
-        <script> document.querySelector('calculated').innerHTML =
-                 tim(document.querySelector("template[data-template='calculated']").innerHTML, 
+      <stats>
+        <script> document.querySelector('stats').innerHTML =
+                 tim(document.querySelector("template[data-template='stats']").innerHTML, 
                      {bmr: 0, maintain: 0, loss: 0});
         </script>
-      </calculated>
+      </stats>
+
 
         <div class='button_pad pure-g'>
           <div class='pure-u-11-24'><button class="pure-button affirm" data-fn='apply'>Apply</button></div>
@@ -106,7 +105,7 @@
       </div>
     
     <!-- Food -->
-    <div data-scope='food' style='display: visible'>
+    <div data-scope='food' style='display: none'>
       <template data-template='entry'>
         <div class='rounded'>
           <div class='pure-u-5-24'>{{name}}</div>
@@ -154,7 +153,7 @@
     </body>
 
     <script src='js/lib/routie.min.js'></script>
-    <script src='js/lib/util.js'></script>
+    <script src='js/lib/input.js'></script>
     <script src='js/core/database.js'></script>
     <script src='js/core/time.js'></script>
     <script src='js/core/view.js'></script>
@@ -166,7 +165,7 @@
     <script src='js/module/nav.js'></script>
 
     <script>
-      /* routing */ window.location = '#settings';  routie('*', function(name) {View(name);});
+      /* routing */ window.location = '#food';  routie('*', function(name) {View(name);});
       /* init db */ Food.Global({db: Database.Read(Time.Day()), totals: Database.Totals(Time.Day()), mode: "add"});
     </script>
 
